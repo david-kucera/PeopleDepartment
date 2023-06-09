@@ -6,7 +6,7 @@ namespace PeopleDepartment.ReportConsoleApp
 
     internal class Program
     {
-        static void Main(string input, string template, string output = null)
+        static void Main(string input, string template, string? output = null)
         {
             //Console.WriteLine(template);
             //Console.WriteLine(input);
@@ -36,32 +36,11 @@ namespace PeopleDepartment.ReportConsoleApp
 
                     text = text.Replace("[[Department]]", report.Department);
 
-                    if (report.Head is null)
-                    {
-                        text = text.Replace("[[Head]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Head]]", report.Head.DisplayName);
-                    }
+                    text = text.Replace("[[Head]]", report.Head is null ? "" : report.Head.DisplayName);
 
-                    if (report.Deputy is null)
-                    {
-                        text = text.Replace("[[Deputy]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Deputy]]", report.Deputy.DisplayName);
-                    }
+                    text = text.Replace("[[Deputy]]", report.Deputy is null ? "" : report.Deputy.DisplayName);
 
-                    if (report.Secretary is null)
-                    {
-                        text = text.Replace("[[Secretary]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Secretary]]", report.Secretary.DisplayName);
-                    }
+                    text = text.Replace("[[Secretary]]", report.Secretary is null ? "" : report.Secretary.DisplayName);
 
                     text = text.Replace("[[NumberOfEmployees]]", report.NumberOfEmployees.ToString());
                     text = text.Replace("[[NumberOfProfessors]]", report.NumberOfProfessors.ToString());
@@ -91,11 +70,7 @@ namespace PeopleDepartment.ReportConsoleApp
                     file.Close();
 
                     File.WriteAllText(path, text);
-
-                    
                 }
-
-
             }
 
             // Print to console
@@ -107,32 +82,11 @@ namespace PeopleDepartment.ReportConsoleApp
 
                     text = text.Replace("[[Department]]", report.Department);
 
-                    if (report.Head is null)
-                    {
-                        text = text.Replace("[[Head]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Head]]", report.Head.DisplayName);
-                    }
+                    text = text.Replace("[[Head]]", report.Head is null ? "" : report.Head.DisplayName);
 
-                    if (report.Deputy is null)
-                    {
-                        text = text.Replace("[[Deputy]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Deputy]]", report.Deputy.DisplayName);
-                    }
+                    text = text.Replace("[[Deputy]]", report.Deputy is null ? "" : report.Deputy.DisplayName);
 
-                    if (report.Secretary is null)
-                    {
-                        text = text.Replace("[[Secretary]]", "");
-                    }
-                    else
-                    {
-                        text = text.Replace("[[Secretary]]", report.Secretary.DisplayName);
-                    }
+                    text = text.Replace("[[Secretary]]", report.Secretary is null ? "" : report.Secretary.DisplayName);
 
                     text = text.Replace("[[NumberOfEmployees]]", report.NumberOfEmployees.ToString());
                     text = text.Replace("[[NumberOfProfessors]]", report.NumberOfProfessors.ToString());

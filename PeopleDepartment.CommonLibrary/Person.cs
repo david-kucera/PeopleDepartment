@@ -18,16 +18,16 @@
             DisplayName = displayName;
 
             // napr. Mgr. Peter Novotný, PhD.
-            string[] data = DisplayName.Split(" ");
+            var data = DisplayName.Split(" ");
 
-            string lastNameWithComma = LastName + ",";
+            var lastNameWithComma = LastName + ",";
 
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 if (data[i].Equals(FirstName))
                 {
-                    string titlesBefore = "";
-                    for (int j = 0; j < i; j++)
+                    var titlesBefore = "";
+                    for (var j = 0; j < i; j++)
                     {
                         titlesBefore += data[j];
                         // If person has more titles
@@ -40,8 +40,8 @@
                 }
                 if (data[i].Equals(lastNameWithComma))
                 {
-                    string titlesAfter = "";
-                    for (int k = i+1; k < data.Length; k++)
+                    var titlesAfter = "";
+                    for (var k = i+1; k < data.Length; k++)
                     {
                         titlesAfter += data[k];
                         // If person has more titles
@@ -62,12 +62,12 @@
 
         public string ToFormattedString()
         {
-            string val = "";
+            var val = "";
             val += DisplayName;
 
-            int numberOfWhiteSpaces = 40 - val.Length;
+            var numberOfWhiteSpaces = 40 - val.Length;
 
-            for (int i = 0; i < numberOfWhiteSpaces; i++)
+            for (var i = 0; i < numberOfWhiteSpaces; i++)
             {
                 val += " ";
             }

@@ -23,7 +23,7 @@ namespace PeopleDepartment.ViewerWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        DepartmentReport[] Reports;
+        private DepartmentReport[]? _reports;
 
         public MainWindow()
         {
@@ -35,13 +35,13 @@ namespace PeopleDepartment.ViewerWpfApp
             PhdList.Items.Clear();
             EmployeeList.Items.Clear();
 
-            var rep = Reports[DepartmentsBox.SelectedIndex];
+            var rep = _reports![DepartmentsBox.SelectedIndex];
             var students = rep.PhDStudents;
             var employees = rep.Employees;
 
-            Head.Content = rep.Head.DisplayName;
-            Deputy.Content = rep.Deputy.DisplayName;
-            Secretary.Content = rep.Secretary.DisplayName;
+            Head.Content = rep.Head!.DisplayName;
+            Deputy.Content = rep.Deputy!.DisplayName;
+            Secretary.Content = rep.Secretary!.DisplayName;
 
             foreach (var student in students)
             {
@@ -58,9 +58,10 @@ namespace PeopleDepartment.ViewerWpfApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog();
-            fileDialog.InitialDirectory = "C:\\Users\\kucera8\\Documents\\FriProS\\82eab0da";
-            fileDialog.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+            var fileDialog = new OpenFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*"
+            };
             fileDialog.ShowDialog();
 
             if (!fileDialog.FileName.Any()) return;
@@ -68,26 +69,26 @@ namespace PeopleDepartment.ViewerWpfApp
             FileInfo fi = new(filePath);
 
             // Get reports from csv file
-            PersonCollection personCollection = new PersonCollection();
+            PersonCollection personCollection = new();
             personCollection.LoadFromCsv(fi);
 
-            Reports = personCollection.GetDepartmentReports();
+            _reports = personCollection.GetDepartmentReports();
 
             // Fill combobox with dep names
-            foreach (var report in Reports)
+            foreach (var report in _reports)
             {
                 DepartmentsBox.Items.Add(report.Department);
             }
 
             DepartmentsBox.SelectedIndex = 0; // Select first department
 
-            var rep = Reports[DepartmentsBox.SelectedIndex];
+            var rep = _reports[DepartmentsBox.SelectedIndex];
             var students = rep.PhDStudents;
             var employees = rep.Employees;
 
-            Head.Content = rep.Head.DisplayName;
-            Deputy.Content = rep.Deputy.DisplayName;
-            Secretary.Content = rep.Secretary.DisplayName;
+            Head.Content = rep.Head!.DisplayName;
+            Deputy.Content = rep.Deputy!.DisplayName;
+            Secretary.Content = rep.Secretary!.DisplayName;
 
             foreach (var student in students)
             {
