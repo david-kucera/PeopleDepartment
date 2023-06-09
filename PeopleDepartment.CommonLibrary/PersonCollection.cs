@@ -137,8 +137,8 @@ namespace PeopleDepartment.CommonLibrary
                 numberOfAssociateProfessors = countAssoc;
 
                 // Sort Lists of employees and PhdStudents
-                List<Person> sortedEmp = employees.OrderBy(o => o.FirstName).ToList();
-                List<Person> sortedStud = phdStudents.OrderBy(o => o.FirstName).ToList();
+                List<Person> sortedEmp = employees.OrderBy(o => o.LastName).ThenBy(o => o.FirstName).ToList();
+                List<Person> sortedStud = phdStudents.OrderBy(o => o.LastName).ThenBy(o => o.FirstName).ToList();
 
                 DepartmentReport report = new(depName, head, deputy, secretary, numberOfProfessors, numberOfAssociateProfessors, sortedEmp, sortedStud);
                 departmentReports[indexDep] = report;
