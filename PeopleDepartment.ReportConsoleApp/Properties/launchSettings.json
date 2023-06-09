@@ -2,7 +2,7 @@
   "profiles": {
     "PeopleDepartment.ReportConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "--input people-fri.csv --template templ-dep-sk.txt"
+      "commandLineArgs": "--input people-fri.csv --template templ-dep-en.txt --output Reporty"
     }
   }
 }
